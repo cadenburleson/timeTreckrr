@@ -1,0 +1,72 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <!-- <script src="popup.js"></script> -->
+
+<!-- BOOTSTRAP START-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
+<!-- BOOT STRAP END -->
+
+<link rel="stylesheet" type="text/css" href="main.css">
+
+  </head>
+
+
+  <body>
+    
+      <div id="mainView" class="body">
+        <h3>Time Trakrr</h3>
+        <p>helps you manage your time by allowing you to set how long you'd like to be on certain websites.</p>
+        <div class = "createNewTimer"> 
+          <button type="button" class="btn btn-default" id="btnCreateNewTimer"> Create New Timer </button>
+        </div>
+
+      </div><!-- body div -->
+
+
+      <div id="newTimerView" class="TimerView" style="display : none">
+      <form>
+      <div class="form-group">
+        <label for="itemURL">Item URL</label>
+        <input class="form-control" id="itemURL" placeholder="http://...">
+      </div>
+      <div class="form-group">
+        <label>Limit time per day</label>
+
+        <div class="row">
+          <div class="col-xs-2"><input class="form-control" id="timeLimitHrs" placeholder="00"> : </div>
+          <div class="col-xs-2"><input class="form-control" id="timeLimitMins" placeholder="00"></div>
+        </div>
+
+      </div>
+      <button type="button" class="btn btn-default" id="btnAdd">Add</button>
+      </form>
+    </div>
+
+
+  </body>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="jquery-1.11.2.js"></script>
+  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="timeTrekrr.js"></script>
+
+
+
+</html>
+

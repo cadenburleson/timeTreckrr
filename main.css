@@ -1,0 +1,24 @@
+.body {
+	position: relative;;
+	width: 400px;
+	height: 500px;
+}
+
+.createNewTimer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 100px;
+    bottom: 0;
+    padding: 20px;
+	background-color: rgb(160,160,160) ;
+}
+
+.btn-default {
+	margin: 10px;
+}
+
+.TimerView {
+	width: 400px;
+	height: 500px;
+}
