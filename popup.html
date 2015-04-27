@@ -3,70 +3,112 @@
  This page is shown when the extension button is clicked, because the
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
- -->
-<html>
-  <head>
-    <title>Getting Started Extension's Popup</title>
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-    <!-- <script src="popup.js"></script> -->
-
-<!-- BOOTSTRAP START-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    
-<!-- BOOT STRAP END -->
-
-<link rel="stylesheet" type="text/css" href="main.css">
-
-  </head>
+-->
+<html ng-app="timeTrekrr">
+<head>
+  <title>Getting Started Extension's Popup</title>
+      <!--
+        - JavaScript and HTML must be in separate files: see our Content Security
+        - Policy documentation[1] for details and explanation.
+        -
+        - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+      -->
+      
+      <!-- BOOTSTRAP CSS START-->
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" type="text/css" href="bootstrap-3.3.4/css/bootstrap.min.css">
+      <!-- BOOT STRAP CSS END -->
+      <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
 
 
-  <body>
-    
+    <body>
+      <!-- *** MAIN VIEW START *** -->
       <div id="mainView" class="body">
-        <h3>Time Trakrr</h3>
-        <p>helps you manage your time by allowing you to set how long you'd like to be on certain websites.</p>
+
+        <div id="app_description">
+          <h3>TIME Trakrr</h3>
+          <p>
+            helps you manage your time by allowing you to set how long you'd like to be on certain websites. More info
+            <a href="http://slamatron.com/" target="_blank">here.</a>
+          </p>
+          <!-- The X button to close the description of the app -->
+          <button type="button" class="btn btn-default" id="app_description_close_button" aria-label="Left Align">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <hr></hr>
+
+        <div id = "timerContainer">
+          <div id = "timerContainerBitches"></div>
+          <!-- Timers are added in here from the timeTrekkrr script -->
+        </div>
+
         <div class = "createNewTimer"> 
           <button type="button" class="btn btn-default" id="btnCreateNewTimer"> Create New Timer </button>
         </div>
+        <!-- *** MAIN VIEW END *** -->
 
       </div><!-- body div -->
 
-
+      <!-- *** SET TIMER SETTINGS VIEW START *** -->
       <div id="newTimerView" class="TimerView" style="display : none">
-      <form>
-      <div class="form-group">
-        <label for="itemURL">Item URL</label>
-        <input class="form-control" id="itemURL" placeholder="http://...">
+        <form>
+          <div class="form-group">
+            <label for="itemURL">Item URL :</label>
+            <input class="form-control" id="itemURL" placeholder="http://...">
+          </div>
+          <div class="form-group">
+            <label>Limit time per day :</label>
+
+            <div class="row">
+              <div class="col-xs-4"><input class="form-control" id="timeLimitHrs" placeholder="Hours"></div>
+              <div class="col-xs-4"><input class="form-control" id="timeLimitMins" placeholder="Minutes"></div>
+            </div>
+
+          </div>
+          <button type="button" class="btn btn-default" id="btnAdd">Add</button>
+          <!-- <p class = "outputTimeString">...</p> -->
+          <hr></hr>
+        </form>
       </div>
-      <div class="form-group">
-        <label>Limit time per day</label>
+      <!-- *** SET TIMER SETTINGS VIEW END *** -->
 
-        <div class="row">
-          <div class="col-xs-4"><input class="form-control" id="timeLimitHrs" placeholder="Hours"></div>
-          <div class="col-xs-4"><input class="form-control" id="timeLimitMins" placeholder="Minutes"></div>
-        </div>
-
-      </div>
-      <button type="button" class="btn btn-default" id="btnAdd">Add</button>
-      </form>
-    </div>
+    </body>
 
 
-  </body>
-  
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="jquery-1.11.2.js"></script>
-  <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <script src="timeTrekrr.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery-1.11.2.js"></script>
+    <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+
+    <script src="bootstrap-3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="timeTrekrr.js"></script>
+
+    <script src="myDatabase.js"></script>
 
 
 
-</html>
+    <script type="text/javascript">
+    $(window).on("blur focus", function(e) {
+
+      var prevType = $(this).data("prevType");
+
+      if (prevType != e.type) {   //  reduce double fire issues
+        switch (e.type) {
+          case "blur":
+          console.log('BLUR');
+          break;
+          case "focus":
+          console.log('FOCUS');       
+          break;
+        }
+      }
+
+      $(this).data("prevType", e.type);
+    });
+    </script>
+
+    </html>
 
