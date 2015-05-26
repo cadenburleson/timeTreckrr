@@ -8,7 +8,7 @@
   "browser_action": {
     "default_icon": "iconFolder/timer-icon.png",
     "default_popup": "popup.html",
-    "default_title": "Click here!"
+    "default_title": "Time Trackrr"
   },
 
   // "content_scripts": [

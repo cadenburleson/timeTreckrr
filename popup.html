@@ -6,7 +6,8 @@
 -->
 <html ng-app="timeTrekrr">
 <head>
-  <title>Getting Started Extension's Popup</title>
+  <!-- <meta http-equiv="refresh" content="3" > -->
+  <title>Time Trackrr</title>
       <!--
         - JavaScript and HTML must be in separate files: see our Content Security
         - Policy documentation[1] for details and explanation.
@@ -45,8 +46,18 @@
           <!-- Timers are added in here from the timeTrekkrr script -->
         </div>
 
-        <div class = "createNewTimer"> 
-          <button type="button" class="btn btn-default" id="btnCreateNewTimer"> Create New Timer </button>
+        <div id = "buttonBar">
+
+          <div class = "btn_wide"> 
+            <button type="button" class="btn btn-default" id="btnCreateNewTimer"> Create New Timer </button>
+          </div>
+          <div class = "btn_wide"> 
+            <button type="button" class="btn btn-default" id="btnGetTimerData"> Get Timer Data </button>
+          </div>
+          <div class = "btn_wide"> 
+            <button type="button" class="btn btn-default" id="btnDeleteTimerData"> Delete All Data </button>
+          </div>
+          
         </div>
         <!-- *** MAIN VIEW END *** -->
 
@@ -56,58 +67,52 @@
       <div id="newTimerView" class="TimerView" style="display : none">
         <form>
           <div class="form-group">
-            <label for="itemURL">Item URL :</label>
+            <label for="itemURL">Item URL:</label>
             <input class="form-control" id="itemURL" placeholder="http://...">
           </div>
-          <div class="form-group">
-            <label>Limit time per day :</label>
 
-            <div class="row">
-              <div class="col-xs-4"><input class="form-control" id="timeLimitHrs" placeholder="Hours"></div>
-              <div class="col-xs-4"><input class="form-control" id="timeLimitMins" placeholder="Minutes"></div>
-            </div>
-
+          <label>Limit time per day:</label>
+          <div class="input-group" id = "timePerDay">
+            <input type="text" class="form-control" id="timeLimitHrs" placeholder="The amount of hours you want to use item-url.">
+            <span class="input-group-addon">Hours:</span>
           </div>
+          <div class="input-group" id = "timePerDay">
+            <input type="text" class="form-control" id="timeLimitMins" placeholder="The amount of Minutes you want to use item-url.">
+            <span class="input-group-addon">Minutes:</span>
+          </div>
+          
           <button type="button" class="btn btn-default" id="btnAdd">Add</button>
           <!-- <p class = "outputTimeString">...</p> -->
           <hr></hr>
         </form>
       </div>
       <!-- *** SET TIMER SETTINGS VIEW END *** -->
-
     </body>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="jquery-1.11.2.js"></script>
-    <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
-
     <script src="bootstrap-3.3.4/js/bootstrap.min.js"></script>
-
+    
     <script src="timeTrekrr.js"></script>
-
     <script src="myDatabase.js"></script>
-
-
+    
 
     <script type="text/javascript">
     $(window).on("blur focus", function(e) {
-
       var prevType = $(this).data("prevType");
-
-      if (prevType != e.type) {   //  reduce double fire issues
-        switch (e.type) {
-          case "blur":
-          console.log('BLUR');
-          break;
-          case "focus":
-          console.log('FOCUS');       
-          break;
+        if (prevType != e.type) {   //  reduce double fire issues
+          switch (e.type) {
+            case "blur":
+            console.log('BLUR');
+            break;
+            case "focus":
+            console.log('FOCUS');       
+            break;
+          }
         }
-      }
-
-      $(this).data("prevType", e.type);
-    });
+        $(this).data("prevType", e.type);
+      });
     </script>
 
     </html>

@@ -1,9 +1,21 @@
 .body {
 	position: relative;
-
 	width: 400px;
 	height: 500px;
 	
+}
+#mainView {
+	overflow: auto;	
+}
+
+#timerContainer {
+	overflow: auto;
+}
+
+#timePerDay {
+	/*margin-top: 10px;*/
+	margin-bottom: 20px;
+
 }
 
 #app_description {
@@ -20,18 +32,35 @@
     margin-right: 10px;
 }
 
-#timerContainer {
-	overflow: auto;
-}
-
-.createNewTimer {
-	position: fixed;
-	bottom: 0;
+#buttonBar {
+	/*position: relative;*/
 	width: 100%;
 	height: 100px;
-    bottom: 0;
-    padding: 20px;
+	bottom: 0;
 	background-color: rgb(160,160,160);
+}
+#buttonBarContent {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	padding: 20px;
+}
+
+/*createNewTimer*/
+.btn_wide {
+	width: 150px;
+	height: 50px;
+	top: 50%;
+	bottom: 50%;
+}
+
+#btnDeleteTimerData {
+	position: relative;
+	right: 0;
+}
+#btnCreateNewTimer	{
+	position: relative;
+	left: 0;	
 }
 
 .TimerView {
@@ -42,18 +71,15 @@
 .progress-bar progress-bar-info progress-bar-striped {
 	height: 50px;
 }
-
 .progress {
 	background: rgba(245, 245, 245, 1);
 	border: 0px solid rgba(245, 245, 245, 1);
 	border-radius: 4px;
 	height: 40px;
 }
-
 .progress-bar-custom {
 	background: rgba(66, 139, 202, 1);
 } 
-
 .progress-striped .progress-bar-custom {
 	background-color: rgba(66, 139, 202, 1);
 	background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255, 255, 255, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255, 255, 255, 0.15)),color-stop(0.75,rgba(255, 255, 255, 0.15)),color-stop(0.75,transparent),to(transparent)));
