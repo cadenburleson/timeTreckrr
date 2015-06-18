@@ -1,5 +1,11 @@
 var db;
 
+// Used to get a hold of specific timers by their int in the database
+// increment along with the creation of a new timer so that it stays consistant
+var timerInt = 0;
+
+var startDate = Math.floor(Date.now() / 1000);
+
 // Used to access all your trackers (arrays)
 // var newTracker = [{
 //   url: itemURL,
@@ -30,8 +36,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Only able to define object stores in this function so I've heard?
     if (!thisDB.objectStoreNames.contains("timers")) {
-      thisDB.createObjectStore("timers", { autoIncrement: true });
+      var objectStore = thisDB.createObjectStore("timers", { autoIncrement: true });
       console.log('Database-ObjectStore / "timers" / Created = Success');
+      // First arg is name of index, second is the path
+      objectStore.createIndex("timers", "url", {unique : true});
       // os.creatIndex("url", "url", { unique : true });
 
     }
@@ -62,10 +70,6 @@ function deleteTimerDatabase() {
   console.log('Timer Database Deleted Successfully');
 };
 
-
-var startDate = Math.floor(Date.now() / 1000);
-
-
 function addTimerData() {
 
   var url = $("#itemURL").val();
@@ -79,6 +83,9 @@ function addTimerData() {
   //ask for store
   var store = transaction.objectStore("timers");
 
+  console.log("store Index Names = " + store.indexNames);
+  // console.log(objectStore.indexNames);
+
   //define a timer
   var timer = {
     url: url,
@@ -88,66 +95,124 @@ function addTimerData() {
 
   //perform the add
   // var request = store.put
+  // var request = objectStore.add(timerData[i]);
   var request = store.add(timer);
-
+  
   request.onerror = function(e) {
     console.log("error", e.target.error.name);
-    
+    console.dir(e.target);
   }
   request.onsuccess = function(e) {
+    timerInt ++;
+    console.log("timerInt : " + timerInt);
     console.log("successfully added a timer");
   }
 
 }
+  
+var timerName;
 
-function getTimerData(x) {
+//maybe name TimerData
+//So that you can do
+// TimerData.getMinutes
+function getTimerData() {
 
-  // x = $("#itemURL").val();
+  var url = $("#itemURL").val();
+  var hours = $("#timeLimitHrs").val();
+  var minutes = $("#timeLimitMins").val();
 
   var transaction = db.transaction(["timers"], "readonly");
   var store = transaction.objectStore("timers");
 
-  var getRequest = store.get(x);
+  var getRequest = store.get(timerInt);
 
   getRequest.onsuccess = function(e) {
     var result = e.target.result;
+
+    console.log("url : " + url);
+    console.log("hours : " + hours);
+    console.log("minutes : " + minutes);
+
     console.dir(result);
+
+    function getUrl() {
+
+    }
+    function getHours() {
+
+    }
+    function getMinutes() {
+
+    }
+
     // console.log("getTimerData :" + result.url);
   }
 
 }
 
-// function addData() {
+// Timers.getTimer.byName
+// Timers.getTimer.byHash
 
-//   // loadData();
-//   //Get a transaction
-//   // open a read/write db transaction, ready for adding the data
-//   var transaction = db.transaction(['timers'], 'readwrite');
-//   // report on the success of opening the transaction
-//   transaction.oncomplete = function(event) { console.log('addData() transaction = success'); };
-//   transaction.onerror = function(event) { console.log('addData() transaction = fail'); };
-//   //Ask for the objectStore
-//   var objectStore = transaction.objectStore("timers");
+function Timers() {
+  var timersArray = [];
+  function getTimer() {
+    var myTimer;
+    function byHash(){
+    }
+    function byName(){
+    }
+
+  }
+}
+
+function getAllTimersFromDataBase() {
+
+  // var myTimers = [];
+  var myTimersByUrl = [];
+  var myTimersByKey = [];
   
-//   newTracker[0].startTime = startDate;
-//   newTracker[0].url = itemURL;
-//   newTracker[0].hours = timeLimitHrs;
-//   newTracker[0].minutes = timeLimitMins;
+  var transaction = db.transaction(["timers"], "readonly");
+  var store = transaction.objectStore("timers");
 
-//   // add our newItem object to the object store
-//   var objectStoreRequest = objectStore.put(newTracker[0]);
+  store.openCursor().onsuccess = function(event) {
+    var cursor = event.target.result;
+    if (cursor) {
+      myTimersByUrl.push(cursor.value.url);
+      myTimersByKey.push(cursor.key);
+      cursor.continue();
+    }
+    else {
+      console.dir("All your timer info by Url : " + myTimersByUrl);
+      console.dir("All your timer info by Key : " + myTimersByKey);
+    }
+  };
 
-//   objectStoreRequest.onsuccess = function(event) {
-//     // report the success of our new item going into the database
-//     console.log('new item added successfully');
-//   }
+  // function byUrl() {
+  //     store.openCursor().onsuccess = function(event) {
+  //     var cursor = event.target.result;
+  //     if (cursor) {
+  //       myTimersByUrl.push(cursor.value.url);
+  //       cursor.continue();
+  //     }else {
+  //       console.dir("All your timer info by Url : " + myTimersByUrl);
+  //     }
+  //   };
+  // }
 
-//   getData();
 
-// }//END OF addData(){}
+  // function byKey() {
+  //     store.openCursor().onsuccess = function(event) {
+  //     var cursor = event.target.result;
+  //     if (cursor) {
+  //       myTimersByKey.push(cursor.key);
+  //       cursor.continue();
+  //     }else {
+  //       console.dir("All your timer info by key : " + myTimersByKey);
+  //     }
+  //   };
+  // }
 
-
-var urls = [];
+}
 
 function getData() {
 

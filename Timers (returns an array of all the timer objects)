@@ -1,0 +1,34 @@
+Timers (returns an array of all the timer objects)
+	|—.getTimerByUrl (returns a timer in the array by url)
+	|—.getTimerByHours (returns a timer in the array by hours)
+	|—.getTimerByMinutes (returns a timer in the array by Minutes)
+	|—.getTimerByKey (returns a timer in the array by It’s Key)
+	|—.getTimerByHash (returns a timer in the array by It’s hash)
+
+
+Timers (var timers[]) {
+	
+}
+
+Timers () {
+	
+	var timers[];
+
+	var transaction = db.transaction(["timers"], "readonly");
+  	var store = transaction.objectStore("timers");
+
+  store.openCursor().onsuccess = function(event) {
+
+    var cursor = event.target.result;
+
+    // Returns an array of timer Objects
+    if (cursor) {
+      // timers.push(cursor.value);
+      cursor.continue();
+    }
+    else {
+      console.dir("All your timer info : " + timers);
+    }
+  };
+
+}

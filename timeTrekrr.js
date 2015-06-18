@@ -15,12 +15,20 @@ $('#btnDeleteTimerData').click(function() {
 
 
 $('#btnGetTimerData').click(function() {
-	window.getTimerData(1);
+	window.getAllTimersFromDataBase();
+	// window.getTimerData();
+});
+
+$('#btnGetTimerDataByUrl').click(function() {
+	window.getAllTimersFromDataBase.byUrl();
+	// window.getTimerData();
 });
 
 $('#app_description_close_button').click(function() {
 	$('#app_description').css('display', 'none');
 });
+
+var timerProgressBar = '<div class="progress progress-striped"><div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span><H3>Facebook</H3></div></div>';
 
 $('#btnAdd').click( function() {
 
@@ -34,14 +42,11 @@ $('#btnAdd').click( function() {
 
 } );
 
-
-var timerProgressBar = '<div class="progress progress-striped"><div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span><H3>Facebook</H3></div></div>';
-
 // $('#timerContainerBitches').html(progressBarBitches);
 
-$('#newTimerCreatorLink').click(function(){
-	$('#timerContainerBitches').append(timerProgressBar);
-});
+// $('#newTimerCreatorLink').click(function(){
+// 	$('#timerContainerBitches').append(timerProgressBar);
+// });
 
 
 
